@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -61,5 +62,20 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
     @Override
     public void run() {
 
+    }
+
+    public void pause() {
+        drawing = false;
+        try {
+            thread.join();
+        } catch (Exception e) {
+            Log.e("Error:","joining thread");
+        }
+    }
+
+    public void resume() {
+        drawing = true;
+        thread = new Thread(this);
+        thread.start();
     }
 }
