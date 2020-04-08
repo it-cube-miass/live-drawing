@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class LiveDrawingView extends SurfaceView {
+public class LiveDrawingView extends SurfaceView implements Runnable {
     private final boolean DEBUGGING = true;
 
     private SurfaceHolder holder;
@@ -21,6 +21,10 @@ public class LiveDrawingView extends SurfaceView {
     private int screenY;
     private int fontSize;
     private int marginSize;
+
+    private Thread thread = null;
+    private volatile boolean drawing;
+    private boolean paused = true;
 
     public LiveDrawingView(Context context, int x, int y) {
         super(context);
@@ -52,5 +56,10 @@ public class LiveDrawingView extends SurfaceView {
         int yLine1 = startY + fontSize;
         paint.setTextSize(fontSize);
         canvas.drawText("fps: " + fps, startX, yLine1, paint);
+    }
+
+    @Override
+    public void run() {
+
     }
 }
