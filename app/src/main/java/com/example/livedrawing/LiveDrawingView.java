@@ -19,9 +19,16 @@ public class LiveDrawingView extends SurfaceView {
     private int screenX;
     private int screenY;
     private int fontSize;
-    private int fontMargin;
+    private int marginSize;
 
     public LiveDrawingView(Context context, int x, int y) {
         super(context);
+
+        screenX = x;
+        screenY = y;
+        fontSize = screenX / 20;
+        marginSize = screenX / 75;
+        holder = getHolder();
+        paint = new Paint();
     }
 }
