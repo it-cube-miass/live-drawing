@@ -52,6 +52,7 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
     }
 
     private void printDebugginText() {
+        paint.setColor(Color.WHITE);
         int startX = 150;
         int startY = marginSize;
         int yLine1 = startY + fontSize;
@@ -61,7 +62,22 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
+        while (drawing) {
+            long frameStartTime = System.currentTimeMillis();
+            if (paused) {
+                update();
+            }
 
+            draw();
+
+            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
+            if (timeThisFrame > 0) {
+                fps = MS_IN_SECONDS / timeThisFrame;
+            }
+        }
+    }
+
+    private void update() {
     }
 
     public void pause() {
