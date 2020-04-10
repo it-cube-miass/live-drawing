@@ -71,6 +71,10 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
             canvas.drawRect(resetButton, paint);
             canvas.drawRect(pauseButton, paint);
 
+            for (int i = 0; i < nextSystem; i++) {
+                particleSystems.get(i).draw(canvas, paint);
+            }
+
             holder.unlockCanvasAndPost(canvas);
         }
     }
@@ -102,6 +106,11 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
     }
 
     private void update() {
+        for (int i = 0; i < particleSystems.size(); i++) {
+            if (particleSystems.get(i).isRunning) {
+                particleSystems.get(i).update(fps);
+            }
+        }
     }
 
     public void pause() {
