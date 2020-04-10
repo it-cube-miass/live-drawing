@@ -1,5 +1,7 @@
 package com.example.livedrawing;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PointF;
 
 import java.util.ArrayList;
@@ -45,6 +47,20 @@ public class PacticleSystem {
 
         for (Particle p : particles) {
             p.setPosition(startPosition);
+        }
+    }
+
+    void draw(Canvas canvas, Paint paint) {
+        for (Particle p : particles) {
+            paint.setARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+
+            // размер частиц
+            float sizeX = 10;
+            float sizeY = 10;
+
+            float x = p.getPosition().x;
+            float y = p.getPosition().y;
+            canvas.drawRect(x, y, x + sizeX, x + sizeY, paint);
         }
     }
 }
