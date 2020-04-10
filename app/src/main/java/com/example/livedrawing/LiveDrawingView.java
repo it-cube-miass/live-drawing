@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -126,5 +128,18 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
         drawing = true;
         thread = new Thread(this);
         thread.start();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_MOVE ) {
+            particleSystems.get(nextSystem).emitParticles(new PointF(event.getX(), event.getY()));
+
+            nextSystem++;
+            if (nextSystem > MAX_SYSTEM) {
+                nextSystem = 0;
+            }
+        }
+        return true;
     }
 }
