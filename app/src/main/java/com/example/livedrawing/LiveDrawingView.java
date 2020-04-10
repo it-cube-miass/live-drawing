@@ -140,6 +140,17 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
                 nextSystem = 0;
             }
         }
+
+        if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
+            if (resetButton.contains(event.getX(), event.getY())) {
+                nextSystem = 0;
+            }
+
+            if (pauseButton.contains(event.getX(), event.getY())) {
+                paused = !paused;
+            }
+        }
+
         return true;
     }
 }
