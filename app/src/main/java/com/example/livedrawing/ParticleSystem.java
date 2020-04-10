@@ -7,7 +7,7 @@ import android.graphics.PointF;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PacticleSystem {
+public class ParticleSystem {
     private float duration;
 
     private ArrayList<Particle> particles;

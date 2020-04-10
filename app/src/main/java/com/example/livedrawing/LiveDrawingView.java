@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 public class LiveDrawingView extends SurfaceView implements Runnable {
     private final boolean DEBUGGING = true;
 
@@ -31,6 +33,11 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
     private RectF resetButton;
     private RectF pauseButton;
 
+    private ArrayList<ParticleSystem> particleSystems = new ArrayList<>();
+    private int nextSystem = 0;
+    private final int MAX_SYSTEM = 1000;
+    private int particlesPerSystem = 100;
+
 
     public LiveDrawingView(Context context, int x, int y) {
         super(context);
@@ -44,6 +51,11 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
 
         resetButton = new RectF(0, 0, 100, 100);
         pauseButton = new RectF(0, 150, 100, 250);
+
+        for (int i = 0; i < MAX_SYSTEM; i++) {
+            particleSystems.add(new ParticleSystem());
+            particleSystems.get(i).init(particlesPerSystem);
+        }
     }
 
     private void draw() {
