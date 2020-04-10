@@ -51,16 +51,18 @@ public class ParticleSystem {
     }
 
     void draw(Canvas canvas, Paint paint) {
-        for (Particle p : particles) {
-            paint.setARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        if (isRunning) {
+            for (Particle p : particles) {
+                paint.setARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
 
-            // размер частиц
-            float sizeX = 10;
-            float sizeY = 10;
+                // размер частиц
+                float sizeX = 10;
+                float sizeY = 10;
 
-            float x = p.getPosition().x;
-            float y = p.getPosition().y;
-            canvas.drawRect(x, y, x + sizeX, x + sizeY, paint);
+                float x = p.getPosition().x;
+                float y = p.getPosition().y;
+                canvas.drawRect(x, y, x + sizeX, y + sizeY, paint);
+            }
         }
     }
 }

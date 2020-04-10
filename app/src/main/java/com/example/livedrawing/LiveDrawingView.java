@@ -86,8 +86,13 @@ public class LiveDrawingView extends SurfaceView implements Runnable {
         int startX = 150;
         int startY = marginSize;
         int yLine1 = startY + fontSize;
+        int yLine2 = yLine1 + marginSize + fontSize;
+        int yLine3 = yLine2 + marginSize + fontSize;
         paint.setTextSize(fontSize);
+
         canvas.drawText("fps: " + fps, startX, yLine1, paint);
+        canvas.drawText("Systems: "+ nextSystem, startX, yLine2, paint);
+        canvas.drawText("Particles: " + nextSystem * particlesPerSystem, startX, yLine3, paint);
     }
 
     @Override
