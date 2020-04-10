@@ -38,4 +38,13 @@ public class PacticleSystem {
             isRunning = false;
         }
     }
+
+    void emitParticles(PointF startPosition) {
+        isRunning = true;
+        duration = 3f; // 3 секунды
+
+        for (Particle p : particles) {
+            p.setPosition(startPosition);
+        }
+    }
 }
